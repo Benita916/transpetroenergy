@@ -1,0 +1,6 @@
+{
+  "name": "Transpetro Energy Limited",
+  "description": "Corporate website for Transpetro Energy Limited — Nigerian petroleum products marketing, bulk AGO/diesel supply, logistics coordination, and international energy trading.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
