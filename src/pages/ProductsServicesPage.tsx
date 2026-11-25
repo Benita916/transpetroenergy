@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
-import { BrandImage } from '../components/BrandImage';
+import { CinematicImage, Reveal } from '../components/MotionPrimitives';
 import { PageHero } from '../components/PageHero';
 import { SeoHead } from '../components/SeoHead';
 import { IMAGES, SERVICES } from '../data/company';
@@ -26,7 +26,7 @@ export function ProductsServicesPage() {
 
       {/* Commercial Scope Intro */}
       <section className="bg-white py-14 border-b border-[#DCE3EC]">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <Reveal className="mx-auto max-w-[1200px] px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold text-[#DC620B] mb-1.5">Commercial & Institutional Focus</p>
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0B2545]">
@@ -40,12 +40,15 @@ export function ProductsServicesPage() {
           </div>
           <Link
             to="/supply-logistics"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#0B2545] hover:text-[#DC620B] whitespace-nowrap shrink-0 transition-colors"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-[#0B2545] hover:text-[#DC620B] whitespace-nowrap shrink-0 transition-colors"
           >
             View Supply & Logistics Approach
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            />
           </Link>
-        </div>
+        </Reveal>
       </section>
 
       {/* Individual Service Sections */}
@@ -58,68 +61,73 @@ export function ProductsServicesPage() {
             )}&service=${encodeURIComponent(service.title)}`;
 
             return (
-              <article
-                key={service.id}
-                id={service.id}
-                className="scroll-mt-24 rounded-2xl bg-white border border-[#DCE3EC] overflow-hidden"
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-                  <div
-                    className={`lg:col-span-5 min-h-[260px] lg:min-h-[380px] ${
-                      isEven ? 'lg:order-2' : 'lg:order-1'
-                    }`}
-                  >
-                    <BrandImage
-                      src={service.image}
-                      alt={service.imageAlt}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  <div
-                    className={`lg:col-span-7 p-7 sm:p-10 lg:p-12 flex flex-col justify-between ${
-                      isEven ? 'lg:order-1' : 'lg:order-2'
-                    }`}
-                  >
-                    <div>
-                      <p className="text-sm font-semibold text-[#DC620B] tabular-nums mb-2">
-                        {service.number}. {service.enquiryCategory}
-                      </p>
-                      <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0B2545] leading-tight">
-                        {service.title}
-                      </h2>
-                      <p className="mt-4 text-base text-slate-600 leading-relaxed">
-                        {service.description}
-                      </p>
-
-                      <ul className="mt-6 space-y-2.5 text-sm sm:text-[15px] text-slate-700">
-                        {service.highlights.map((item) => (
-                          <li key={item} className="flex items-start gap-2.5">
-                            <Check className="h-4 w-4 text-[#F27405] shrink-0 mt-1" aria-hidden="true" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+              <Reveal key={service.id} delay={0.05}>
+                <article
+                  id={service.id}
+                  className="group scroll-mt-24 rounded-2xl bg-white border border-[#DCE3EC] overflow-hidden transition-all duration-300 hover:border-[#0B2545]/30 hover:shadow-lg"
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+                    <div
+                      className={`lg:col-span-5 min-h-[260px] lg:min-h-[380px] ${
+                        isEven ? 'lg:order-2' : 'lg:order-1'
+                      }`}
+                    >
+                      <CinematicImage
+                        src={service.image}
+                        alt={service.imageAlt}
+                        ambientZoom={index === 0 || index === 5}
+                        className="w-full h-full"
+                      />
                     </div>
 
-                    <div className="mt-8 pt-6 border-t border-[#EDF1F6] flex flex-wrap items-center gap-4">
-                      <Link
-                        to={enquiryHref}
-                        className="inline-flex items-center justify-center gap-2 rounded-md bg-[#F27405] hover:bg-[#DC620B] text-white text-sm font-semibold px-6 py-3 transition-colors whitespace-nowrap"
-                      >
-                        Enquire Now
-                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                      </Link>
-                      <Link
-                        to="/supply-logistics"
-                        className="text-sm font-semibold text-[#0B2545] hover:text-[#DC620B] transition-colors"
-                      >
-                        Learn how we coordinate delivery
-                      </Link>
+                    <div
+                      className={`lg:col-span-7 p-7 sm:p-10 lg:p-12 flex flex-col justify-between ${
+                        isEven ? 'lg:order-1' : 'lg:order-2'
+                      }`}
+                    >
+                      <div>
+                        <p className="text-sm font-semibold text-[#DC620B] tabular-nums mb-2">
+                          {service.number}. {service.enquiryCategory}
+                        </p>
+                        <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0B2545] leading-tight">
+                          {service.title}
+                        </h2>
+                        <p className="mt-4 text-base text-slate-600 leading-relaxed">
+                          {service.description}
+                        </p>
+
+                        <ul className="mt-6 space-y-2.5 text-sm sm:text-[15px] text-slate-700">
+                          {service.highlights.map((item) => (
+                            <li key={item} className="flex items-start gap-2.5">
+                              <Check className="h-4 w-4 text-[#F27405] shrink-0 mt-1" aria-hidden="true" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="mt-8 pt-6 border-t border-[#EDF1F6] flex flex-wrap items-center gap-4">
+                        <Link
+                          to={enquiryHref}
+                          className="cta-sheen group/cta inline-flex items-center justify-center gap-2 rounded-md bg-[#F27405] hover:bg-[#DC620B] text-white text-sm font-semibold px-6 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md whitespace-nowrap"
+                        >
+                          Enquire Now
+                          <ArrowRight
+                            className="h-4 w-4 transition-transform duration-200 group-hover/cta:translate-x-1"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                        <Link
+                          to="/supply-logistics"
+                          className="text-sm font-semibold text-[#0B2545] hover:text-[#DC620B] transition-colors"
+                        >
+                          Learn how we coordinate delivery
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Reveal>
             );
           })}
         </div>
@@ -127,7 +135,7 @@ export function ProductsServicesPage() {
 
       {/* Bottom Commercial CTA */}
       <section className="bg-white py-16 lg:py-20 border-t border-[#DCE3EC]">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <Reveal className="mx-auto max-w-[1200px] px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="max-w-2xl">
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0B2545]">
               Have a Specific Volume or Supply Requirement?
@@ -139,12 +147,15 @@ export function ProductsServicesPage() {
           </div>
           <Link
             to="/contact?enquiry=Product%20Supply"
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-[#0B2545] hover:bg-[#13355E] text-white text-sm font-semibold px-6 py-3.5 transition-colors whitespace-nowrap shrink-0"
+            className="cta-sheen group inline-flex items-center justify-center gap-2 rounded-md bg-[#0B2545] hover:bg-[#13355E] text-white text-sm font-semibold px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md whitespace-nowrap shrink-0"
           >
             Submit Supply Enquiry
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            />
           </Link>
-        </div>
+        </Reveal>
       </section>
     </>
   );

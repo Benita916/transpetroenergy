@@ -24,17 +24,6 @@
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     text-wrap: balance;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 }
 
 .font-display {
@@ -47,4 +36,158 @@
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+}
+
+/* Cinematic slow Ken Burns zoom (GPU-composited transform only) */
+@keyframes kenBurnsHero {
+  0% {
+    transform: scale(1.01) translate3d(0%, 0%, 0);
+  }
+  100% {
+    transform: scale(1.1) translate3d(-1.2%, -0.8%, 0);
+  }
+}
+
+@keyframes kenBurnsSubtle {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.06) translate3d(-0.6%, -0.4%, 0);
+  }
+}
+
+.animate-ken-burns-hero {
+  animation: kenBurnsHero 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-ken-burns-subtle {
+  animation: kenBurnsSubtle 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Continuous smooth corporate marquee strip */
+@keyframes marqueeLoop {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeLoop 36s linear infinite;
+  will-change: transform;
+}
+
+.marquee-wrapper:hover .animate-marquee-track {
+  animation-play-state: paused;
+}
+
+/* Subtle gold & orange horizon shimmer sweep on corporate accent bars */
+@keyframes accentSweep {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(200%, 0, 0);
+  }
+}
+
+.gold-accent-bar {
+  position: relative;
+  overflow: hidden;
+}
+
+.gold-accent-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+  animation: accentSweep 6.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  will-change: transform;
+}
+
+/* Elegant CTA light sweep on hover */
+.cta-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cta-sheen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 75%
+  );
+  transform: translate3d(-130%, 0, 0);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.cta-sheen:hover::before {
+  transform: translate3d(130%, 0, 0);
+}
+
+/* Smooth animated nav underline glide */
+.nav-glide {
+  position: relative;
+}
+
+.nav-glide::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #F5B800 0%, #F27405 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-glide:hover::after,
+.nav-glide[data-active='true']::after {
+  transform: scaleX(1);
+}
+
+/* Respect user reduced-motion preferences strictly */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-ken-burns-hero,
+  .animate-ken-burns-subtle,
+  .animate-marquee-track,
+  .gold-accent-bar::after {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .cta-sheen::before {
+    transition: none !important;
+    display: none;
+  }
+
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
 }

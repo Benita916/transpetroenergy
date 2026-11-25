@@ -4,6 +4,7 @@
  */
 
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { MotionConfig } from 'motion/react';
 import { Layout } from './components/Layout';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
@@ -37,19 +38,21 @@ function NotFoundPage() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="products-services" element={<ProductsServicesPage />} />
-          <Route path="supply-logistics" element={<SupplyLogisticsPage />} />
-          <Route path="markets" element={<MarketsPage />} />
-          <Route path="why-choose-us" element={<WhyChooseUsPage />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <MotionConfig reducedMotion="user">
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="products-services" element={<ProductsServicesPage />} />
+            <Route path="supply-logistics" element={<SupplyLogisticsPage />} />
+            <Route path="markets" element={<MarketsPage />} />
+            <Route path="why-choose-us" element={<WhyChooseUsPage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </MotionConfig>
   );
 }

@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { BrandImage } from '../components/BrandImage';
+import {
+  CinematicImage,
+  ParallaxBackdrop,
+  Reveal,
+  StaggerGroup,
+  StaggerItem,
+} from '../components/MotionPrimitives';
 import { PageHero } from '../components/PageHero';
 import { SeoHead } from '../components/SeoHead';
 import { COMPANY, IMAGES } from '../data/company';
@@ -67,7 +73,7 @@ export function SupplyLogisticsPage() {
       <section className="bg-white py-20 lg:py-24">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-            <div className="lg:col-span-6 flex flex-col justify-center">
+            <Reveal className="lg:col-span-6 flex flex-col justify-center">
               <div className="h-1 w-12 bg-gradient-to-r from-[#F5B800] to-[#F27405] mb-5" aria-hidden="true" />
               <p className="text-sm font-semibold text-[#DC620B] mb-2">Our Delivery Approach</p>
               <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#0B2545]">
@@ -83,16 +89,15 @@ export function SupplyLogisticsPage() {
                 transparent tracking across each stage of an order, ensuring industrial and
                 commercial buyers stay informed from initial confirmation through site delivery.
               </p>
-            </div>
+            </Reveal>
 
-            <div className="lg:col-span-6">
-              <div className="h-full min-h-[300px] rounded-xl overflow-hidden border border-[#DCE3EC]">
-                <BrandImage
-                  src={IMAGES.heroTerminal}
-                  alt="Coastal petroleum storage terminal and tank farm infrastructure at sunset"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="lg:col-span-6 group">
+              <CinematicImage
+                src={IMAGES.heroTerminal}
+                alt="Coastal petroleum storage terminal and tank farm infrastructure at sunset"
+                ambientZoom
+                className="h-full min-h-[300px] rounded-xl border border-[#DCE3EC]"
+              />
             </div>
           </div>
         </div>
@@ -101,36 +106,42 @@ export function SupplyLogisticsPage() {
       {/* Six Core Supply & Logistics Stages */}
       <section className="bg-[#F6F8FB] border-y border-[#DCE3EC] py-20 lg:py-24">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
-          <div className="max-w-2xl mb-12">
+          <Reveal className="max-w-2xl mb-12">
             <p className="text-sm font-semibold text-[#DC620B] mb-2">End-to-End Coordination</p>
             <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#0B2545]">
               How We Coordinate Petroleum Supply
             </h2>
-          </div>
+          </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerGroup staggerDelay={0.07} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {SUPPLY_PILLARS.map((pillar) => (
-              <div
-                key={pillar.number}
-                className="rounded-xl bg-white border border-[#DCE3EC] p-7 flex flex-col"
-              >
-                <span className="font-display text-sm font-bold text-[#DC620B] tabular-nums">
-                  {pillar.number}.
-                </span>
-                <h3 className="mt-2 font-display text-xl font-bold text-[#0B2545]">
-                  {pillar.title}
-                </h3>
-                <p className="mt-3 text-sm sm:text-[15px] text-slate-600 leading-relaxed">
-                  {pillar.description}
-                </p>
-              </div>
+              <StaggerItem key={pillar.number}>
+                <div className="h-full rounded-xl bg-white border border-[#DCE3EC] p-7 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-[#0B2545]/30 hover:shadow-md">
+                  <span className="font-display text-sm font-bold text-[#DC620B] tabular-nums">
+                    {pillar.number}.
+                  </span>
+                  <h3 className="mt-2 font-display text-xl font-bold text-[#0B2545]">
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-3 text-sm sm:text-[15px] text-slate-600 leading-relaxed">
+                    {pillar.description}
+                  </p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
-      {/* Section 7: International Supply & Export Coordination */}
+      {/* Section 7: International Supply & Export Coordination with Parallax */}
       <section className="relative overflow-hidden bg-[#071A33] text-white py-20 lg:py-24">
+        <ParallaxBackdrop
+          src={IMAGES.heroOilTanker}
+          alt="International oil tanker sailing across calm ocean"
+          kenBurns="none"
+          imageClassName="w-full h-full object-cover opacity-15"
+          overlayClassName="bg-gradient-to-r from-[#071A33]/94 via-[#071A33]/88 to-[#071A33]/92"
+        />
         <img
           src={COMPANY.logoEmblem}
           alt=""
@@ -139,17 +150,16 @@ export function SupplyLogisticsPage() {
         />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-            <div className="lg:col-span-6">
-              <div className="h-full min-h-[320px] rounded-xl overflow-hidden border border-white/15">
-                <BrandImage
-                  src={IMAGES.maritimeTanker}
-                  alt="International petroleum product tanker vessel navigating coastal waters near a loading terminal"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="lg:col-span-6 group">
+              <CinematicImage
+                src={IMAGES.maritimeTanker}
+                alt="International petroleum product tanker vessel navigating coastal waters near a loading terminal"
+                ambientZoom
+                className="h-full min-h-[320px] rounded-xl border border-white/15"
+              />
             </div>
 
-            <div className="lg:col-span-6 flex flex-col justify-center">
+            <Reveal className="lg:col-span-6 flex flex-col justify-center">
               <p className="text-sm font-semibold text-[#F5B800] tabular-nums mb-2">
                 07. Cross-Border Trade Coordination
               </p>
@@ -171,26 +181,29 @@ export function SupplyLogisticsPage() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   to="/contact?enquiry=Export%20Enquiry"
-                  className="inline-flex items-center gap-2 rounded-md bg-[#F27405] hover:bg-[#DC620B] text-white text-sm font-semibold px-6 py-3.5 transition-colors whitespace-nowrap"
+                  className="cta-sheen group inline-flex items-center gap-2 rounded-md bg-[#F27405] hover:bg-[#DC620B] text-white text-sm font-semibold px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg whitespace-nowrap"
                 >
                   Submit Export Enquiry
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
                 </Link>
                 <Link
                   to="/products-services"
-                  className="inline-flex items-center gap-2 rounded-md bg-white/10 hover:bg-white/20 text-white border border-white/25 text-sm font-semibold px-6 py-3.5 transition-colors whitespace-nowrap"
+                  className="inline-flex items-center gap-2 rounded-md bg-white/10 hover:bg-white/20 text-white border border-white/25 text-sm font-semibold px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap"
                 >
                   View Products & Services
                 </Link>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* Bottom CTA */}
       <section className="bg-white py-16 lg:py-20">
-        <div className="mx-auto max-w-[1200px] px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <Reveal className="mx-auto max-w-[1200px] px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="max-w-2xl">
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0B2545]">
               Plan Your Next Bulk Fuel Delivery
@@ -202,12 +215,15 @@ export function SupplyLogisticsPage() {
           </div>
           <Link
             to="/contact?enquiry=Bulk%20Diesel%20Purchase"
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-[#0B2545] hover:bg-[#13355E] text-white text-sm font-semibold px-6 py-3.5 transition-colors whitespace-nowrap shrink-0"
+            className="cta-sheen group inline-flex items-center justify-center gap-2 rounded-md bg-[#0B2545] hover:bg-[#13355E] text-white text-sm font-semibold px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md whitespace-nowrap shrink-0"
           >
             Enquire Now
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+              aria-hidden="true"
+            />
           </Link>
-        </div>
+        </Reveal>
       </section>
     </>
   );

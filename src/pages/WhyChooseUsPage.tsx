@@ -9,7 +9,12 @@ import {
   ShieldCheck,
   Users,
 } from 'lucide-react';
-import { BrandImage } from '../components/BrandImage';
+import {
+  CinematicImage,
+  Reveal,
+  StaggerGroup,
+  StaggerItem,
+} from '../components/MotionPrimitives';
 import { PageHero } from '../components/PageHero';
 import { SeoHead } from '../components/SeoHead';
 import { COMPANY, IMAGES } from '../data/company';
@@ -94,7 +99,7 @@ export function WhyChooseUsPage() {
           className="pointer-events-none select-none absolute -right-12 top-24 w-80 h-auto opacity-[0.04]"
         />
         <div className="relative mx-auto max-w-[1200px] px-6 lg:px-8">
-          <div className="max-w-3xl mb-14">
+          <Reveal className="max-w-3xl mb-14">
             <div className="h-1 w-12 bg-gradient-to-r from-[#F5B800] to-[#F27405] mb-5" aria-hidden="true" />
             <p className="text-sm font-semibold text-[#DC620B] mb-2">Our Standards of Engagement</p>
             <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[#0B2545]">
@@ -105,69 +110,78 @@ export function WhyChooseUsPage() {
               plain-spoken communication, and honouring commitments. These seven principles define
               how Transpetro Energy Limited works with buyers and business partners.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerGroup staggerDelay={0.07} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {BUSINESS_PRINCIPLES.map((principle, index) => {
               const Icon = principle.icon;
               const isLast = index === BUSINESS_PRINCIPLES.length - 1;
               return (
-                <article
+                <StaggerItem
                   key={principle.number}
-                  className={`rounded-xl bg-[#F6F8FB] border border-[#DCE3EC] p-7 lg:p-8 flex flex-col justify-between ${
-                    isLast ? 'md:col-span-2 lg:col-span-3 lg:flex-row lg:items-center lg:gap-10 bg-[#0B2545] text-white border-[#0B2545]' : ''
-                  }`}
+                  className={isLast ? 'md:col-span-2 lg:col-span-3' : ''}
                 >
-                  <div className={isLast ? 'lg:max-w-3xl' : ''}>
-                    <div className="flex items-center justify-between gap-4 mb-5">
-                      <span
-                        className={`font-display text-sm font-bold tabular-nums ${
-                          isLast ? 'text-[#F5B800]' : 'text-[#DC620B]'
-                        }`}
-                      >
-                        {principle.number}.
-                      </span>
-                      <div
-                        className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 ${
-                          isLast
-                            ? 'bg-white/10 text-[#F5B800]'
-                            : 'bg-[#0B2545] text-[#F5B800]'
-                        }`}
-                      >
-                        <Icon className="h-5 w-5" aria-hidden="true" />
+                  <article
+                    className={`group h-full rounded-xl border p-7 lg:p-8 flex flex-col justify-between transition-all duration-300 ${
+                      isLast
+                        ? 'lg:flex-row lg:items-center lg:gap-10 bg-[#0B2545] text-white border-[#0B2545] shadow-md'
+                        : 'bg-[#F6F8FB] border-[#DCE3EC] hover:-translate-y-1 hover:bg-white hover:border-[#0B2545]/30 hover:shadow-md'
+                    }`}
+                  >
+                    <div className={isLast ? 'lg:max-w-3xl' : ''}>
+                      <div className="flex items-center justify-between gap-4 mb-5">
+                        <span
+                          className={`font-display text-sm font-bold tabular-nums ${
+                            isLast ? 'text-[#F5B800]' : 'text-[#DC620B]'
+                          }`}
+                        >
+                          {principle.number}.
+                        </span>
+                        <div
+                          className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105 ${
+                            isLast
+                              ? 'bg-white/10 text-[#F5B800]'
+                              : 'bg-[#0B2545] text-[#F5B800]'
+                          }`}
+                        >
+                          <Icon className="h-5 w-5" aria-hidden="true" />
+                        </div>
                       </div>
-                    </div>
-                    <h3
-                      className={`font-display text-xl font-bold ${
-                        isLast ? 'text-white sm:text-2xl' : 'text-[#0B2545]'
-                      }`}
-                    >
-                      {principle.title}
-                    </h3>
-                    <p
-                      className={`mt-3 text-sm sm:text-[15px] leading-relaxed ${
-                        isLast ? 'text-slate-200' : 'text-slate-600'
-                      }`}
-                    >
-                      {principle.description}
-                    </p>
-                  </div>
-
-                  {isLast && (
-                    <div className="mt-6 lg:mt-0 shrink-0">
-                      <Link
-                        to="/contact?enquiry=Business%20Partnership"
-                        className="inline-flex items-center justify-center gap-2 rounded-md bg-[#F27405] hover:bg-[#DC620B] text-white text-sm font-semibold px-6 py-3.5 transition-colors whitespace-nowrap"
+                      <h3
+                        className={`font-display text-xl font-bold ${
+                          isLast ? 'text-white sm:text-2xl' : 'text-[#0B2545]'
+                        }`}
                       >
-                        Partner With Us
-                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                      </Link>
+                        {principle.title}
+                      </h3>
+                      <p
+                        className={`mt-3 text-sm sm:text-[15px] leading-relaxed ${
+                          isLast ? 'text-slate-200' : 'text-slate-600'
+                        }`}
+                      >
+                        {principle.description}
+                      </p>
                     </div>
-                  )}
-                </article>
+
+                    {isLast && (
+                      <div className="mt-6 lg:mt-0 shrink-0">
+                        <Link
+                          to="/contact?enquiry=Business%20Partnership"
+                          className="cta-sheen group/cta inline-flex items-center justify-center gap-2 rounded-md bg-[#F27405] hover:bg-[#DC620B] text-white text-sm font-semibold px-6 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg whitespace-nowrap"
+                        >
+                          Partner With Us
+                          <ArrowRight
+                            className="h-4 w-4 transition-transform duration-200 group-hover/cta:translate-x-1"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      </div>
+                    )}
+                  </article>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
@@ -175,16 +189,15 @@ export function WhyChooseUsPage() {
       <section className="bg-[#F6F8FB] border-t border-[#DCE3EC] py-20">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-            <div className="lg:col-span-6">
-              <div className="h-full min-h-[280px] rounded-xl overflow-hidden border border-[#DCE3EC]">
-                <BrandImage
-                  src={IMAGES.pipelineInfrastructure}
-                  alt="Steel petroleum transfer pipelines and industrial valve station at sunset"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="lg:col-span-6 group">
+              <CinematicImage
+                src={IMAGES.pipelineInfrastructure}
+                alt="Steel petroleum transfer pipelines and industrial valve station at sunset"
+                ambientZoom
+                className="h-full min-h-[280px] rounded-xl border border-[#DCE3EC]"
+              />
             </div>
-            <div className="lg:col-span-6 flex flex-col justify-center">
+            <Reveal className="lg:col-span-6 flex flex-col justify-center">
               <p className="text-sm font-semibold text-[#DC620B] mb-2">Start a Conversation</p>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0B2545]">
                 Experience Disciplined Commercial Energy Supply
@@ -196,19 +209,22 @@ export function WhyChooseUsPage() {
               <div className="mt-7 flex flex-wrap gap-4">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-md bg-[#0B2545] hover:bg-[#13355E] text-white text-sm font-semibold px-6 py-3 transition-colors whitespace-nowrap"
+                  className="cta-sheen group inline-flex items-center gap-2 rounded-md bg-[#0B2545] hover:bg-[#13355E] text-white text-sm font-semibold px-6 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md whitespace-nowrap"
                 >
                   Contact Us
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
                 </Link>
                 <Link
                   to="/products-services"
-                  className="inline-flex items-center gap-2 rounded-md bg-white hover:bg-[#EDF1F6] text-[#0B2545] border border-[#DCE3EC] text-sm font-semibold px-6 py-3 transition-colors whitespace-nowrap"
+                  className="inline-flex items-center gap-2 rounded-md bg-white hover:bg-[#EDF1F6] text-[#0B2545] border border-[#DCE3EC] text-sm font-semibold px-6 py-3 transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap"
                 >
                   Explore Products & Services
                 </Link>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>

@@ -15,6 +15,7 @@ import {
   Send,
   UserCheck,
 } from 'lucide-react';
+import { Reveal } from '../components/MotionPrimitives';
 import { PageHero } from '../components/PageHero';
 import { SeoHead } from '../components/SeoHead';
 import { COMPANY, ENQUIRY_CATEGORIES, IMAGES, type EnquiryCategory } from '../data/company';
@@ -220,7 +221,7 @@ export function ContactPage() {
         <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Official Corporate Contact Details */}
-            <div className="lg:col-span-5 space-y-8">
+            <Reveal className="lg:col-span-5 space-y-8">
               <div>
                 <div className="h-1 w-12 bg-gradient-to-r from-[#F5B800] to-[#F27405] mb-5" aria-hidden="true" />
                 <p className="text-sm font-semibold text-[#DC620B] mb-2">Direct Corporate Desk</p>
@@ -309,7 +310,8 @@ export function ContactPage() {
                   <div className="text-sm space-y-1">
                     <h3 className="font-display font-bold text-[#0B2545]">Corporate Credentials</h3>
                     <p className="text-slate-700">
-                      Managing Director/CEO: <span className="font-semibold text-[#0B2545]">{COMPANY.mdCeo}</span>
+                      Managing Director/CEO:{' '}
+                      <span className="font-semibold text-[#0B2545]">{COMPANY.mdCeo}</span>
                     </p>
                     <p className="text-slate-600 tabular-nums">
                       RC Number: <span className="font-medium text-[#0B2545]">{COMPANY.rcNumber}</span> · TIN:{' '}
@@ -318,11 +320,11 @@ export function ContactPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Right Column: Validated Enquiry Form */}
-            <div className="lg:col-span-7">
-              <div className="rounded-2xl bg-white border border-[#DCE3EC] p-6 sm:p-8 lg:p-10">
+            <Reveal delay={0.12} className="lg:col-span-7">
+              <div className="rounded-2xl bg-white border border-[#DCE3EC] p-6 sm:p-8 lg:p-10 shadow-xs">
                 <h2 className="font-display text-2xl font-bold text-[#0B2545]">
                   Commercial Enquiry Form
                 </h2>
@@ -373,8 +375,9 @@ export function ContactPage() {
                               .
                             </p>
                             <p>
-                              Once configured and the server is restarted, <code className="font-mono">POST /api/enquiries</code>{' '}
-                              automatically dispatches enquiries via Nodemailer directly to{' '}
+                              Once configured and the server is restarted,{' '}
+                              <code className="font-mono">POST /api/enquiries</code> automatically
+                              dispatches enquiries via Nodemailer directly to{' '}
                               <code className="font-mono">{COMPANY.email}</code>.
                             </p>
                           </div>
@@ -407,7 +410,10 @@ export function ContactPage() {
                             : 'Enquiry Validated — Direct Dispatch Required'}
                         </p>
                         <p className="text-xs font-medium text-slate-600 tabular-nums">
-                          Reference ID: <span className="text-[#0B2545] font-semibold">{submissionResult.referenceId}</span>
+                          Reference ID:{' '}
+                          <span className="text-[#0B2545] font-semibold">
+                            {submissionResult.referenceId}
+                          </span>
                         </p>
                         <p className="leading-relaxed">{submissionResult.message}</p>
 
@@ -469,7 +475,7 @@ export function ContactPage() {
                         placeholder="e.g. Chinedu Okafor"
                         aria-invalid={Boolean(fieldErrors.fullName)}
                         aria-describedby={fieldErrors.fullName ? 'fullName-error' : undefined}
-                        className={`w-full rounded-md border px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545] ${
+                        className={`w-full rounded-md border px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545] ${
                           fieldErrors.fullName ? 'border-red-500' : 'border-[#CBD5E1]'
                         }`}
                       />
@@ -492,7 +498,7 @@ export function ContactPage() {
                         value={form.companyName}
                         onChange={(e) => setForm({ ...form, companyName: e.target.value })}
                         placeholder="Organisation or trading entity"
-                        className="w-full rounded-md border border-[#CBD5E1] px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545]"
+                        className="w-full rounded-md border border-[#CBD5E1] px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545]"
                       />
                     </div>
                   </div>
@@ -513,7 +519,7 @@ export function ContactPage() {
                         placeholder="name@company.com"
                         aria-invalid={Boolean(fieldErrors.email)}
                         aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-                        className={`w-full rounded-md border px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545] ${
+                        className={`w-full rounded-md border px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545] ${
                           fieldErrors.email ? 'border-red-500' : 'border-[#CBD5E1]'
                         }`}
                       />
@@ -539,7 +545,7 @@ export function ContactPage() {
                         placeholder="+234 800 000 0000"
                         aria-invalid={Boolean(fieldErrors.phone)}
                         aria-describedby={fieldErrors.phone ? 'phone-error' : undefined}
-                        className={`w-full rounded-md border px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545] ${
+                        className={`w-full rounded-md border px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545] ${
                           fieldErrors.phone ? 'border-red-500' : 'border-[#CBD5E1]'
                         }`}
                       />
@@ -562,7 +568,7 @@ export function ContactPage() {
                       onChange={(e) =>
                         setForm({ ...form, enquiryType: e.target.value as EnquiryCategory })
                       }
-                      className="w-full rounded-md border border-[#CBD5E1] px-3.5 py-2.5 text-sm text-[#0B2545] bg-white focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545]"
+                      className="w-full rounded-md border border-[#CBD5E1] px-3.5 py-2.5 text-sm text-[#0B2545] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545]"
                     >
                       {ENQUIRY_CATEGORIES.map((category) => (
                         <option key={category} value={category}>
@@ -586,7 +592,7 @@ export function ContactPage() {
                       placeholder="Share your product requirements, estimated volume, delivery location, or partnership enquiry..."
                       aria-invalid={Boolean(fieldErrors.message)}
                       aria-describedby={fieldErrors.message ? 'message-error' : undefined}
-                      className={`w-full rounded-md border px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545] ${
+                      className={`w-full rounded-md border px-3.5 py-2.5 text-sm text-[#0B2545] bg-white placeholder:text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0B2545]/20 focus:border-[#0B2545] ${
                         fieldErrors.message ? 'border-red-500' : 'border-[#CBD5E1]'
                       }`}
                     />
@@ -601,7 +607,7 @@ export function ContactPage() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-[#F27405] hover:bg-[#DC620B] disabled:opacity-60 text-white font-semibold text-sm px-7 py-3.5 transition-colors cursor-pointer whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B2545]"
+                      className="cta-sheen w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-[#F27405] hover:bg-[#DC620B] disabled:opacity-60 text-white font-semibold text-sm px-7 py-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md cursor-pointer whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0B2545]"
                     >
                       <Send className="h-4 w-4" aria-hidden="true" />
                       {isSubmitting ? 'Validating & Submitting...' : 'Submit Enquiry'}
@@ -609,7 +615,7 @@ export function ContactPage() {
                   </div>
                 </form>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -617,7 +623,7 @@ export function ContactPage() {
       {/* Location Map: Oyigbo / Iriebe, Rivers State, Nigeria */}
       <section className="bg-[#F6F8FB] border-t border-[#DCE3EC] py-16 lg:py-20">
         <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+          <Reveal className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
             <div>
               <p className="text-sm font-semibold text-[#DC620B] mb-1">Office Location</p>
               <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#0B2545]">
@@ -629,22 +635,24 @@ export function ContactPage() {
               href="https://www.openstreetmap.org/?mlat=4.8781&mlon=7.1282#map=13/4.8781/7.1282"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B2545] hover:text-[#DC620B] whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0B2545] hover:text-[#DC620B] whitespace-nowrap transition-colors"
             >
               Open Larger Map
               <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
-          </div>
+          </Reveal>
 
-          <div className="rounded-2xl overflow-hidden border border-[#DCE3EC] bg-white h-[380px] sm:h-[420px]">
-            <iframe
-              title="Map showing Oyigbo and Iriebe, Rivers State, Nigeria"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=7.0600%2C4.8350%2C7.1950%2C4.9200&layer=mapnik&marker=4.8781%2C7.1282"
-              className="w-full h-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+          <Reveal delay={0.08}>
+            <div className="rounded-2xl overflow-hidden border border-[#DCE3EC] bg-white h-[380px] sm:h-[420px]">
+              <iframe
+                title="Map showing Oyigbo and Iriebe, Rivers State, Nigeria"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=7.0600%2C4.8350%2C7.1950%2C4.9200&layer=mapnik&marker=4.8781%2C7.1282"
+                className="w-full h-full border-0"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
     </>

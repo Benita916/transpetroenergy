@@ -24,6 +24,7 @@ export const COMPANY = {
 } as const;
 
 export const IMAGES = {
+  heroOilTanker: '/src/assets/images/hero_oil_tanker_shipping_1795617998659.jpg',
   heroTerminal: '/src/assets/images/hero_energy_terminal_1795333920288.jpg',
   agoDieselSupply: '/src/assets/images/ago_diesel_supply_1795333920096.jpg',
   tankerLogistics: '/src/assets/images/tanker_logistics_fleet_1795333919523.jpg',
