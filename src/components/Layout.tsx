@@ -4,6 +4,7 @@ import { Globe, Mail, MapPin, Menu, Phone, X } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { COMPANY, NAV_LINKS, SERVICES } from '../data/company';
 import { LUXURY_EASE, StaggerGroup, StaggerItem } from './MotionPrimitives';
+import { PearlAssistant } from './PearlAssistant';
 import { WhatsAppButton } from './WhatsAppButton';
 
 export function Layout() {
@@ -345,6 +346,7 @@ export function Layout() {
       </footer>
 
       <WhatsAppButton />
+      <PearlAssistant />
     </div>
   );
 }
